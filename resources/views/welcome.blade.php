@@ -28,7 +28,7 @@
                 <h2>Ticket de prueba</h2>
                 <p>Utiliza el siguiente botón para imprimir un recibo de prueba en la impresora predeterminada:</p>
                 <button class="btn btn-primary" id="btnImprimir">Imprimir ticket</button>
-                <a href="{{route('imprimir')}}" class="btn btn-success" target="_blank">Imprimir Con laravel</a>
+                <a href="print:prueba" class="btn btn-success" target="_blank">Imprimir Con laravel</a>
 
             </div>
             <div class="col-12 col-lg-6">
