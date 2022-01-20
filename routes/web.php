@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 /* Ruta para imprimir ticket */
 Route::get('/print/ticket', [ImprimirTicket::class, 'imprimir'])->name('imprimir');
+Route::post('/print/ticket/venta', [ImprimirTicket::class, 'prueba'])->name('imprimir.venta');

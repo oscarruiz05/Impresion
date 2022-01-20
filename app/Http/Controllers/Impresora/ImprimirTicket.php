@@ -47,4 +47,19 @@ class ImprimirTicket extends Controller
         $impresora->cut();
         $impresora->close();
     }
+
+    public function prueba(){
+        $venta = [
+            'id' => 1,
+            'numero' => 'ONL-00001',
+            'pasajero' => 'prueba'
+        ];
+
+        $json = json_encode($venta);
+
+        // codificar en base64
+        $crypted = base64_encode(gzdeflate($json));
+        // return $crypted;
+        return response()->json($crypted);
+    }
 }

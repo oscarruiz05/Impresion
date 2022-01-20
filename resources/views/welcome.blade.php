@@ -10,6 +10,9 @@
     <title>Imprimir ticket de venta desde JavaScript usando plugin</title>
     <!-- Cargar el CSS de Boostrap-->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -28,7 +31,9 @@
                 <h2>Ticket de prueba</h2>
                 <p>Utiliza el siguiente botón para imprimir un recibo de prueba en la impresora predeterminada:</p>
                 <button class="btn btn-primary" id="btnImprimir">Imprimir ticket</button>
-                <a href="print://prueba/" class="btn btn-success" target="_blank">Imprimir Con laravel</a>
+                {{-- <a href="print://prueba" class="btn btn-success" id="imprimirC" target="_blank">Imprimir Con laravel</a> --}}
+                <button class="btn btn-success" id="imprimirC">Imprimir Con laravel</button>
+                <a class="btn btn-success" id="imprimir" target="_self" hidden></a>
 
             </div>
             <div class="col-12 col-lg-6">
@@ -38,8 +43,32 @@
             </div>
         </div>
     </main>
-    <script src="{{asset('assets/js/Impresora.js')}}"></script>
-    <script src="{{asset('assets/js/script.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/Impresora.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/js/script.js')}}"></script> --}}
+    <script>
+        let print = document.getElementById('imprimirC');
+        // print.click()
+        // for (let index = 0; index < 3; index++) {
+        //     print.click()
+        // }
+        print.addEventListener('click', () =>{
+            fetch('/print/ticket/venta',{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+            })
+            .then(res => res.json())
+            .then((data) => {
+                const a = document.getElementById('imprimir')
+                a.href=`print://${data}`
+                a.click()
+                console.log(data)
+            });
+        });
+
+    </script>
 </body>
 
 </html>
