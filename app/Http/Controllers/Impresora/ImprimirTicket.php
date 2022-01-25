@@ -49,13 +49,26 @@ class ImprimirTicket extends Controller
     }
 
     public function prueba(){
+        $ventas = [
+            [
+                'id' => 1,
+                'numero' => 'ONL-00001',
+                'pasajero' => 'Usuario prueba 1'
+            ],
+            [
+                'id' => 2,
+                'numero' => 'ONL-00002',
+                'pasajero' => 'Usuario prueba 2'
+            ]
+
+        ];
         $venta = [
-            'id' => 1,
-            'numero' => 'ONL-00001',
-            'pasajero' => 'prueba'
+            'id' => 2,
+            'numero' => 'ONL-00002',
+            'pasajero' => 'prueba dos'
         ];
 
-        $json = json_encode($venta);
+        $json = json_encode($ventas);
 
         // codificar en base64
         $crypted = base64_encode(gzdeflate($json));
